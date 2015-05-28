@@ -1,0 +1,7 @@
+name 'euca'
+maintainer 'The Authors'
+maintainer_email 'you@example.com'
+license 'all_rights'
+description 'Installs/Configures euca'
+long_description 'Installs/Configures euca'
+version '0.1.0'
