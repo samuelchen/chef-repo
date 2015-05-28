@@ -89,8 +89,8 @@ EOP
 
 echo "> Changing hostname ..."
 echo "NETWORKING=yes" > /etc/sysconfig/network
-echo "HOSTNAME=<%= name %>" >> /etc/sysconfig/network
-#cat /etc/sysconfig/network
+echo "HOSTNAME=<%= @config[:chef_node_name]%>" >> /etc/sysconfig/network
+cat /etc/sysconfig/network
 
 echo "> Adding hosts ..."
 echo "127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4" > /etc/hosts
