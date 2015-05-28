@@ -1,0 +1,56 @@
+{
+    "eucalyptus": {
+      "yum-options": "--nogpg",
+      "eucalyptus-repo": "file:///tmp/euca/eucalyptus/downloads.eucalyptus.com/software/eucalyptus/4.1/centos/6/x86_64/",
+      "euca2ools-repo": "file:///tmp/euca/euca2ools/downloads.eucalyptus.com/software/euca2ools/3.2/centos/6/x86_64/",
+      "install-service-image": false,
+      "ntp-server": "cn.pool.ntp.org",
+      "topology": {
+        "clc-1": "192.168.0.94",
+        "walrus": "192.168.0.94",
+        "user-facing": ["192.168.0.94"],
+        "clusters": {
+          "default": {
+            "cc-1": "192.168.0.94",
+            "sc-1": "192.168.0.94",
+            "nodes": "192.168.0.94"
+          }
+        }
+      },
+      "network": {
+        "mode": "EDGE",
+        "public-interface": "br0",
+        "private-interface": "br0",
+        "bridged-nic":"eth0",
+        "bridge-ip": "192.168.0.94",
+        "bridge-netmask": "255.255.255.0",
+        "bridge-gateway": "192.168.0.1",
+        "config-json": {
+          "InstanceDnsServers": ["192.168.0.94"],
+          "PublicIps": ["192.168.0.240-192.168.0.245"],
+          "Clusters": [
+            {
+              "Name": "default",
+              "Subnet": {
+                "Subnet": "192.168.0.0",
+                "Netmask": "255.255.255.0",
+                "Gateway": "192.168.0.1"
+              },
+              "PrivateIps": [ "192.168.0.246-192.168.0.250"]
+            }
+          ]
+        }
+      }
+    },
+  "run_list": [
+    "recipe[eucalyptus::cloud-controller]",
+    "recipe[eucalyptus::user-console]",
+    "recipe[eucalyptus::register-components]",
+    "recipe[eucalyptus::walrus]",
+    "recipe[eucalyptus::cluster-controller]",
+    "recipe[eucalyptus::storage-controller]",
+    "recipe[eucalyptus::node-controller]",
+    "recipe[eucalyptus::configure]",
+    "recipe[eucalyptus::create-first-resources]"
+  ]
+}
