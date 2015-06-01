@@ -34,7 +34,7 @@ if node["eucalyptus"]["install-type"] == "packages"
     action :upgrade
     options node['eucalyptus']['yum-options']
     notifies :create, "template[eucalyptus.conf]", :immediately
-    notifies :restart, "service[eucalyptus-cloud]", :immediately
+    #notifies :restart, "service[eucalyptus-cloud]", :immediately
     flush_cache [:before]
   end
 else
@@ -58,7 +58,7 @@ ruby_block "Sync keys for Walrus" do
   only_if { not Chef::Config[:solo] and node['eucalyptus']['sync-keys'] }
 end
 
-service "eucalyptus-cloud" do
-  action [ :enable, :start ]
-  supports :status => true, :start => true, :stop => true, :restart => true
-end
+#service "eucalyptus-cloud" do
+#  action [ :enable, :start ]
+#  supports :status => true, :start => true, :stop => true, :restart => true
+#end
