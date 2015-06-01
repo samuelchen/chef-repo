@@ -14,16 +14,28 @@ directory '/var/www/html/euca-repo' do
   action :create
 end
 
+directory 'var/www/html/euca-repo/repodata' do
+  action :delete
+  recursive true
+end
+
+bash 'copy-file' do
+  user 'root'
+  cwd '/root'
+  code <<-EOH
+    #if [ -d '/var/www/html/euca-repo/repodata/' ]; then
+    #  rm -rf /var/www/html/euca-repo/repodata
+    #fi
+    mount-vmware-share-folders.sh
+    cp -ruv /mnt/VMShares/euca-repo/*  /var/www/html/euca-repo
+  EOH
+end
+
 bash 'create-repo' do
   user 'root'
   cwd '/root'
   code <<-EOH
-    files=`ls /var/www/html/euca-repo`
-    if [ -d 'files' ]; then
-      echo 'euca-repo is existed. /var/www/html/euca-repo'
-    else
-      createrepo --database /var/www/html/euca-repo
-    fi
+    createrepo --database /var/www/html/euca-repo
   EOH
 end
 
@@ -31,12 +43,4 @@ end
 #  path '/var/www/html/euca-repo'
 #end
 
-bash 'copy-file' do
-  user 'root'
-  cwd '/root'
-  code <<-EOH
-    mount-vmware-share-folders.sh
-    cp -ruv /mnt/VMShares/euca-repo/*  /var/www/html/euca-repo
-  EOH
-end
 

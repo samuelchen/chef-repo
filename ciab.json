@@ -1,42 +1,42 @@
 {
     "eucalyptus": {
       "yum-options": "--nogpg",
-      "eucalyptus-repo": "file:///tmp/euca/eucalyptus/downloads.eucalyptus.com/software/eucalyptus/4.1/centos/6/x86_64/",
-      "euca2ools-repo": "file:///tmp/euca/euca2ools/downloads.eucalyptus.com/software/euca2ools/3.2/centos/6/x86_64/",
+      "eucalyptus-repo": "http://repo.euca/euca-repo/eucalyptus/downloads.eucalyptus.com/software/eucalyptus/4.1/centos/6/x86_64/",
+      "euca2ools-repo": "http://repo.euca/euca-repo/euca2ools/downloads.eucalyptus.com/software/euca2ools/3.2/centos/6/x86_64/",
       "install-service-image": false,
       "ntp-server": "cn.pool.ntp.org",
       "topology": {
-        "clc-1": "192.168.0.94",
-        "walrus": "192.168.0.94",
-        "user-facing": ["192.168.0.94"],
+        "clc-1": "192.168.2.15",
+        "walrus": "192.168.2.16",
+        "user-facing": ["192.168.2.15"],
         "clusters": {
           "default": {
-            "cc-1": "192.168.0.94",
-            "sc-1": "192.168.0.94",
-            "nodes": "192.168.0.94"
+            "cc-1": "192.168.2.17",
+            "sc-1": "192.168.2.18",
+            "nodes": "192.168.2.20"
           }
         }
       },
       "network": {
         "mode": "EDGE",
         "public-interface": "br0",
-        "private-interface": "br0",
+        "private-interface": "eth0",
         "bridged-nic":"eth0",
-        "bridge-ip": "192.168.0.94",
+        "bridge-ip": "192.168.2.20",
         "bridge-netmask": "255.255.255.0",
-        "bridge-gateway": "192.168.0.1",
+        "bridge-gateway": "192.168.2.1",
         "config-json": {
-          "InstanceDnsServers": ["192.168.0.94"],
-          "PublicIps": ["192.168.0.240-192.168.0.245"],
+          "InstanceDnsServers": ["192.168.2.1"],
+          "PublicIps": ["192.168.2.100-192.168.2.150"],
           "Clusters": [
             {
               "Name": "default",
               "Subnet": {
-                "Subnet": "192.168.0.0",
+                "Subnet": "192.168.2.0",
                 "Netmask": "255.255.255.0",
-                "Gateway": "192.168.0.1"
+                "Gateway": "192.168.2.1"
               },
-              "PrivateIps": [ "192.168.0.246-192.168.0.250"]
+              "PrivateIps": [ "192.168.2.151-192.168.2.200"]
             }
           ]
         }
